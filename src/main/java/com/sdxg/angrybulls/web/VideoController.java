@@ -2,10 +2,12 @@ package com.sdxg.angrybulls.web;
 import com.sdxg.angrybulls.core.Result;
 import com.sdxg.angrybulls.core.ResultGenerator;
 import com.sdxg.angrybulls.model.Video;
+import com.sdxg.angrybulls.service.FileOprationService;
 import com.sdxg.angrybulls.service.VideoService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,9 +21,15 @@ public class VideoController {
     @Resource
     private VideoService videoService;
 
-    @PutMapping("/add")
-    public Result add(Video video) {
-        videoService.save(video);
+    @Resource
+    private FileOprationService fileOprationService;
+
+    @PostMapping("/add")
+    public Result add(@RequestParam("file") MultipartFile file, Video video) {
+        String fileName = fileOprationService.upload(file);
+        video.setUrl(fileName);
+        System.out.println(fileName);
+//        videoService.save(video);
         return ResultGenerator.genSuccessResult();
     }
 
