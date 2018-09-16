@@ -3,7 +3,6 @@ package com.sdxg.angrybulls.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author YangSheng
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2018/9/8 14:55
  */
 @Controller
-@RequestMapping("/index")
+@RequestMapping("/")
 public class AppController {
 
 
@@ -22,7 +21,7 @@ public class AppController {
      * @author 杨盛
      * @date 2018/9/8 15:07
      */
-    @GetMapping("/")
+    @GetMapping(value={"/", "/index"})
     public String homePage(){
         return "index";
     }

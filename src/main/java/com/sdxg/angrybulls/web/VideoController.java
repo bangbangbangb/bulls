@@ -26,11 +26,11 @@ public class VideoController {
 
     @PostMapping("/add")
     public Result add(@RequestParam("file") MultipartFile file, Video video) {
-        String fileName = fileOprationService.upload(file);
-        video.setUrl(fileName);
-        System.out.println(fileName);
+        String[] fileName = fileOprationService.upload(file);
+        // 存储video的相对路径
+        video.setUrl(fileName[2]);
 //        videoService.save(video);
-        return ResultGenerator.genSuccessResult();
+        return ResultGenerator.genSuccessResult(fileName[2]);
     }
 
     @DeleteMapping("/delete")
