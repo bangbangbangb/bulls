@@ -29,7 +29,8 @@ public class VideoController {
         String[] fileName = fileOprationService.upload(file);
         // 存储video的相对路径
         video.setUrl(fileName[2]);
-//        videoService.save(video);
+        video.setAuthor(0);
+        videoService.save(video);
         return ResultGenerator.genSuccessResult(fileName[2]);
     }
 
